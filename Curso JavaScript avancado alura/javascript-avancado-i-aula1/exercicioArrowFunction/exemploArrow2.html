@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        class SistemaImpressao{
+
+            constructor(props) {
+                this._codigo = 2;
+            }
+
+            imprime(nomes){
+                nomes.forEach(nome => {
+                    console.log(this);
+                    console.log(`${this._codigo}: ${nome}`);
+                });
+            }            
+        }
+
+        let nomes = ['Fávio', 'Nico', 'Douglas'];
+        let si = new SistemaImpressao();
+        si.imprime(nomes);
+
+    </script>
+</body>
+</html>

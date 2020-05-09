@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>TITUTLO</h1>
+    <p>PARAGRAFO</p>
+    <div>DADOS</div>
+    
+    <script>
+        console.log(this); // é windows
+
+        let exibeConteudo = () => {
+            console.log(this);
+            alert(this.textContext);
+        };
+
+        $ = document.querySelector.bind(document);
+
+        $('h1').addEventListener('click', exibeConteudo);
+
+        $('p').addEventListener('click', exibeConteudo);
+
+        $('div').addEventListener('click', exibeConteudo);
+
+
+
+    </script>
+
+</body>
+</html>
