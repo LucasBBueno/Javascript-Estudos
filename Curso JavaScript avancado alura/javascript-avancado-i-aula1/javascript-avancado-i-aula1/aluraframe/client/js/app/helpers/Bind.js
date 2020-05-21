@@ -7,5 +7,5 @@ class Bind {
 
         return proxy; //Construtor podendo retornar
     }
-    
+
 }

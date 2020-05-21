@@ -1,46 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Negociações</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
-    
+
 </head>
+
 <body class="container">
-    
+
     <h1 class="text-center">Negociações</h1>
-    
+
     <form class="form" onsubmit="negociacaoController.adiciona(event)">
-        
+
         <div id="mensagemView"></div>
 
         <div class="form-group">
             <label for="data">Data</label>
-            <input type="date" id="data" class="form-control" required autofocus/>        
-        </div>    
-        
+            <input type="date" id="data" class="form-control" required autofocus />
+        </div>
+
         <div class="form-group">
             <label for="quantidade">Quantidade</label>
-            <input type="number" min="1" step="1" id="quantidade" class="form-control" value="1" required/>
+            <input type="number" min="1" step="1" id="quantidade" class="form-control" value="1" required />
         </div>
-        
+
         <div class="form-group">
             <label for="valor">Valor</label>
-            <input id="valor" type="number" class="form-control"  min="0.01" step="0.01" value="0.0" required />
+            <input id="valor" type="number" class="form-control" min="0.01" step="0.01" value="0.0" required />
         </div>
-        
+
         <button class="btn btn-primary" type="submit">Incluir</button>
     </form>
-    
+
     <div class="text-center">
-        <button class="btn btn-primary text-center" type="button">
-            Importar Negociações
+        <button onclick="negociacaoController.importaNegociacoes()" class="btn btn-primary text-center" type="button">
+            Importar Negociações semana atual
         </button>
+
+        <button onclick="negociacaoController.importaNegociacoesSemanaAnterior()" class="btn btn-primary text-center"
+            type="button">
+            Importar Negociações semana anterior
+        </button>
+
+        <button onclick="negociacaoController.importaNegociacoesSemanaRetrasada()" class="btn btn-primary text-center"
+            type="button">
+            Importar Negociações semana retrasada
+        </button>
+
         <button onclick="negociacaoController.apaga()" class="btn btn-primary text-center" type="button">
             Apagar
         </button>
-    </div> 
+    </div>
     <br>
     <br>
 
@@ -60,15 +73,16 @@
     <script src="js/app/models/Funcionario.js"></script>
     <script src="js/app/services/ProxyFactory.js"></script>
     <script src="js/app/helpers/Bind.js"></script>
+    <script src="js/app/services/NegociacoesService.js"></script>
     <script>
         let negociacaoController = new NegociacaoController();
-
     </script>
 
     <script>
-
-        let funcionario = new Proxy({email: 'abc@abc.com'}, {
-            get(target, prop, receiver){
+        let funcionario = new Proxy({
+            email: 'abc@abc.com'
+        }, {
+            get(target, prop, receiver) {
                 console.log('Armadilha aqui!');
                 return '**' + Reflect.get(target, prop, receiver) + '**';
             }
@@ -76,15 +90,15 @@
         // console.log(funcionario.email);
 
         let funcionarioTeste = new Funcionario('abc@abc.com')
-        let funcionarioProxy = new Proxy(funcionarioTeste ,{
-            set(target, prop, value, receiver){
+        let funcionarioProxy = new Proxy(funcionarioTeste, {
+            set(target, prop, value, receiver) {
                 console.log(`Valor antigo ${target[prop]} propriedade: ${prop} valor novo: ${value}`)
                 return Reflect.set(target, prop, value, receiver);
             }
         })
 
         // funcionarioProxy.email = 'teste@teste.com';
-        
     </script>
 </body>
+
 </html>
